@@ -1,0 +1,151 @@
+<%-layout("/layouts/boilerplate")%>
+<body>
+   <script>
+       const mapToken="<%=process.env.MAP_TOKEN%>"
+       const coordinates=<%- JSON.stringify(list.geometry.coordinates)%>;
+   </script>
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h3><%=list.title%></h3>
+        </div>
+            <div class="card col-6 offset-3 listing-card">
+                <img src="<%=list.image.url%>" class="card-img-top show-img " alt="listing_image">
+                <div class="card-body">
+                <p class="card-text">
+                    <b>Owned By </b><i><%=list.owner.username%></i>
+                    <br>
+                    <%=list.description%>
+                    <br>
+                    <b>Location: </b><%=list.location%>
+                    <br>
+                    <b>Price: </b>&#8377;<%=list.price.toLocaleString("en-In")%>
+                    <br>
+                    <b>Country: </b><%=list.country%>
+                </p>
+                </div>
+            </div>
+    </div>
+ <% if(currUser && list.owner._id.equals(currUser._id)){%>
+    <div class="btns mb-3">
+        <a href="/listings/<%=list._id%>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
+        <form action="/listings/<%=list._id%>?_method=DELETE" method="post">
+            <button  class="btn btn-dark offset-5 ">Delete</button>
+        </form>
+    </div>
+ <%}%>
+ 
+ <% if(!(currUser && list.owner._id.equals(currUser._id))){%>
+<div class="btns mb-3 pd offset-3">
+    <div class="btn btn-dark filter-btn fw-bold border p-2  m-2 filter-option" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+       Book
+    </div>
+</div>
+<%}%>
+
+  <% if(currUser){ %>
+    <div class="cols-8 offset-3">
+        <h4>Leave a review:-</h4>
+        <form action="/listings/<%=list._id%>/review" method="post" novalidate class="needs-validation">
+            <div class="mb-3 mt-3">
+             <label for="rating" class="form-label">Rating</label>
+             <fieldset class="starability-slot">
+                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                <label for="first-rate1" title="Terrible">1 star</label>
+                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                <label for="first-rate2" title="Not good">2 stars</label>
+                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                <label for="first-rate3" title="Average">3 stars</label>
+                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                <label for="first-rate4" title="Very good">4 stars</label>
+                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                <label for="first-rate5" title="Amazing">5 stars</label>
+              </fieldset>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="comment" class="form-label">Comments</label>
+                <textarea 
+                name="review[comment]" 
+                id="comment" 
+                cols="30"
+                 rows="5" 
+                 class="form-control"
+                 required
+                 ></textarea>
+                 <div class="invalid-feedback">Please enter valid feedback!</div>
+            </div>
+            <button class="btn btn-outline-dark mb-3">Submit</button>
+        </form>
+    </div>
+
+    <%}%>
+    
+    <%if(list.reviews.length!=0){%>
+     <div class="row offset-3">
+        <p><b>All reviews</b></p>
+        <%for(review of list.reviews){%>
+            <div class="card col-5 mb-3 ms-3">
+                <div class="card-body">
+              
+                 <h5 class="card-text"><%=review.author.username%></h5>
+                 <p class="card-text"><%=review.comment%></p>
+                 <p class="starability-result card-text" data-rating="<%=review.rating%>" ></p>
+                <form action="/listings/<%=list._id%>/review/<%=review._id%>?_method=DELETE" method="POST" class="mb-3">
+                       <button class="btn btn-sm btn-dark">Delete</button>
+                </form>
+                </div>
+            </div>
+          <%}%>
+     </div>
+    <%}%>
+    <div class="col-8 offset-3 mb-3">
+        <h3>Where you will be</h3>
+        <div id="map"></div>
+    </div>
+       <!-- Modal -->
+<div class="modal modal-lg fade" id="staticBackdrop" data-bs-backdrop="static"
+data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <form id="selectionForm"  action="/listings/<%=list._id%>/booking" method="get" class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Book Your Place</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="padding: 1rem 3rem;">
+            <div class="row">
+                <div class="mb-3 col-6">
+                    <label for="start" class="form-label">Start Date</label>
+                    <input name="start" 
+                           placeholder="Enter  Start Date" 
+                           type="date"
+                           class="form-control" 
+                     required>
+                    <div class="invalid-feedback">Field required!</div>
+                   </div>
+                   <div class="mb-3 col-6">
+                    <label for="end" class="form-label">End Date</label>
+                    <input name="end" 
+                           placeholder="Enter  End Date" 
+                           type="date"
+                           class="form-control" 
+                      required>
+                    <div class="invalid-feedback">Field required!</div>
+                   </div>
+            </div>   
+              <div class="mb-3 col-3">
+                <label for="guest" class="form-label">Enter Guests</label>
+                 <input name="guest" type="range" value="5" min="1" max="16" oninput="this.nextElementSibling.value = this.value" readonly >
+                 <output>5</output>
+                <div class="invalid-feedback">Field required!</div>
+               </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-outline-primary">Apply</button>
+        </div>
+    </form>
+</div>
+</div>
+     <script src="/js/map.js"></script>
+</body>

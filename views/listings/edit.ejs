@@ -1,0 +1,427 @@
+<%-layout("/layouts/boilerplate")%>
+<!-- <style>
+  
+  
+  .create_listing{
+    /* width: 80%; */
+   
+    height: auto;
+    margin: auto;
+    border-bottom-left-radius:1rem ;
+        border-bottom-right-radius:1rem;
+        border-top-left-radius:1rem;
+        border-top-right-radius:1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+        border: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+      
+      }
+  input,textarea,select{
+    background-color: #f8f9fa !important;
+    box-shadow: #0a5071 0px 1px 4px !important;
+   
+   
+  }
+  label{
+    font-weight: 600 !important;
+    color: #0a5071;
+  }
+  h3{
+    font-family: 'Arial', sans-serif; /* Use a clean, readable font */
+  font-size: 24px; /* Adjust the font size */
+  color: #0a5071; /* Use your primary color for the text */
+  text-align: center;
+  font-weight: 700;
+  }
+  
+
+  
+.button-add{
+  background-color:   #609dba;;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-add:hover {
+  background-color: #fff;
+  color: black !important;
+}
+
+.button-add:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-add {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+</style>
+<body>
+  
+  <div class="create_listing">
+    <h3>Edit Your Response</h3>
+    <div class="row mt-3">
+      <div class="col-8 offset-2" >   
+   <form action="/listings/<%=listing._id%>?_method=PATCH" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
+      <div class="mb-3" >
+         <label for="title" class="form-label">Title</label>
+         <input 
+         type="text" 
+         name="listing[title]" 
+         placeholder="Add a catchy title" 
+         class="form-control"
+         value="<%=listing.title%>"
+       
+         />
+      
+       </div>
+        <div class="mb-3">
+         <label for="description" class="form-label">Description</label>
+         <textarea name="listing[description]" 
+         placeholder="Enter  description" 
+         rows="6" 
+         cols="30"
+         class="form-control" 
+         ><%=listing.description%></textarea>
+     
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Image file</label>
+          <input 
+           type="file"
+           name="listing[image]"
+           placeholder="Enter image URL/Link" 
+           class="form-control"
+           value="<%=listing.image%>"
+           />
+ 
+         </div>
+        <div class="row">
+          <div class="mb-3 col-7">
+            <label for="country" class="form-label">Country</label>
+            <input 
+            type="text" 
+            name="listing[country]" 
+            placeholder="Enter  country"
+            class="form-control"
+            value="<%=listing.country%>" 
+            
+            />
+          
+          </div>
+         <div class="mb-3 col-5">
+            <label for="price" class="form-label">Price</label>
+            <input 
+            type="text" 
+            name="listing[price]" 
+            placeholder="Enter  price"
+            class="form-control"
+            value="<%=listing.price%>"
+            
+            />
+        
+           </div>
+         
+        </div>
+       
+       <div class="row">
+        <div class="mb-3 col-7">
+          <label for="location" class="form-label">Location</label>
+          <input 
+          type="text" 
+          name="listing[location]" 
+          placeholder="Enter  location"
+          class="form-control"
+          value="<%=listing.location%>"
+          
+          />
+        
+        </div>
+        <div class="mb-3 col-7">
+          <label for="maxGuest" class="form-label"> Total Guest </label>
+          <input 
+          type="number" 
+          name="listing[maxGuest]" 
+          placeholder="Enter the number of guest allowed"
+          class="form-control"
+          />
+       </div>
+       <div class="mb-3 col-5">
+        <label for="category" class="form-label">Category</label>
+        <select name="listing[category]" class="form-select" aria-label="Default select example" required>
+          <option value="Rooms">Rooms</option>
+          <option value="Trending">Trending</option> 
+          <option value="Campings">Campings</option>
+          <option value="Farms">Farms</option>
+          <option value="Mountains">Mountains</option>
+          <option value="Pools">Pools</option>
+          <option value="Castles">Castles</option>
+          <option value="Arctic">Arctic</option>
+        </select>
+        <div class="invalid-feedback">Enter valid location!</div>
+      </div>
+       <br>
+        <button class="button-add">Edit</button>
+        
+     </form>
+     
+  </div>
+  </div>
+
+</div>
+<script src="/js/script.js"></script>
+</body> -->
+<!-- <body>
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            <h1>Edit Your Response:-</h1>
+            <form action="/listings/<%=listing._id%>?_method=PATCH" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="listing[title]" placeholder="Enter  title" value="<%=listing.title%>" class="form-control" required>
+                    <div class="valid-feedback">Title Looks good!</div>
+                </div>
+                <div class="mb-3">
+                     <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]" placeholder="Enter  description" rows="6" cols="30" class="form-control" required><%=listing.description%></textarea>
+                    <div class="invalid-feedback">Please enter valid descriptions</div>
+                </div>
+               
+              <div class="mb-3">
+                   <label for="image" class="form-label">Image</label>
+                   <input type="file" name="listing[image]"  value="<%=listing.image%>" class="form-control" required>
+                   <div class="invalid-feedback">Please enter valid image</div>
+                </div>
+              <div class="row"> 
+                <div class="mb-3 col-4">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" name="listing[price]" placeholder="Enter  price" value="<%=listing.price%>" class="form-control" required>
+                    <div class="invalid-feedback">Please enter valid price</div> 
+                </div>
+                   <div class="mb-3 col-8">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" name="listing[country]" placeholder="Enter  country" value="<%=listing.country%>" class="form-control" required>
+                    <div class="invalid-feedback">Please enter valid country</div>
+                </div>
+              </div>
+               <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" name="listing[location]" placeholder="Enter  location" value="<%=listing.location%>" class="form-control" required>
+                <div class="invalid-feedback">Please enter valid location</div> 
+              </div>
+                <button class="btn btn-dark edit-btn mt-3 mb-2">Edit</button>
+             </form>
+        </div>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+   -->
+
+
+   <% layout("/layouts/boilerplate") -%>
+<style>
+  
+  
+  .create_listing{
+    width: 80%;
+   
+    height: auto;
+    margin: auto;
+    border-bottom-left-radius:1rem ;
+        border-bottom-right-radius:1rem;
+        border-top-left-radius:1rem;
+        border-top-right-radius:1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+        border: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+        box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+      }
+  input,textarea,select{
+    background-color: #f8f9fa !important;
+    box-shadow: #0a5071 0px 1px 4px !important;
+   
+   
+  }
+  label{
+    font-weight: 600 !important;
+    color: #0a5071;
+  }
+  h3{
+    font-family: 'Arial', sans-serif; /* Use a clean, readable font */
+  font-size: 24px; /* Adjust the font size */
+  color: #0a5071; /* Use your primary color for the text */
+  text-align: center;
+  font-weight: 700;
+  }
+  
+
+  
+.button-add{
+  background-color:   #609dba;;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-add:hover {
+  background-color: #fff;
+  color: black !important;
+}
+
+.button-add:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-add {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+</style>
+<body>
+  
+  <div class="create_listing">
+    <h3>Edit Listings Details</h3>
+    <div class="row mt-3">
+      <div class="col-8 offset-2" >   
+   <form action="/listings/<%=listing._id%>?_method=PATCH" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
+      <div class="mb-3" >
+         <label for="title" class="form-label">Title</label>
+         <input 
+         type="text" 
+         name="listing[title]" 
+         placeholder="Add a catchy title" 
+         class="form-control"
+         value="<%=listing.title%>"
+
+         />
+       </div>
+        <div class="mb-3">
+         <label for="description" class="form-label">Description</label>
+         <textarea name="listing[description]" 
+         placeholder="Enter  description" 
+         rows="6" 
+         cols="30"
+         class="form-control" 
+         > <%=listing.description%></textarea>
+
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Image file(option1)</label>
+          <input 
+           type="file"
+           name="listing[image]"
+           placeholder="Enter image URL/Link" 
+           class="form-control"
+           value="<%=listing.image%>"
+           />
+ 
+         </div>
+        <div class="row">
+          <div class="mb-3 col-7">
+            <label for="country" class="form-label">Country</label>
+            <input 
+            type="text" 
+            name="listing[country]" 
+            placeholder="Enter  country"
+            class="form-control"
+            value="<%=listing.country%>"
+            />
+            <div class="invalid-feedback">Enter valid country!</div>
+          </div>
+         <div class="mb-3 col-5">
+            <label for="price" class="form-label">Price</label>
+            <input 
+            type="text" 
+            name="listing[price]" 
+            placeholder="Enter  price"
+            class="form-control"
+            value="<%=listing.price%>"
+            />
+          
+           </div>
+         
+        </div>
+       
+       <div class="row">
+        <div class="mb-3 col-7">
+          <label for="location" class="form-label">Location</label>
+          <input 
+          type="text" 
+          name="listing[location]" 
+          placeholder="Enter  location"
+          class="form-control"
+          value="<%=listing.location%>"
+          />
+        
+        </div>
+        <div class="mb-3 col-5">
+          <label for="category" class="form-label">Category</label>
+          <select name="listing[category]" class="form-select" aria-label="Default select example" >
+            <option value="Rooms">Rooms</option>
+            <option value="Trending">Trending</option> 
+            <option value="Campings">Campings</option>
+            <option value="Farms">Farms</option>
+            <option value="Mountains">Mountains</option>
+            <option value="Pools">Pools</option>
+            <option value="Castles">Castles</option>
+            <option value="Arctic">Arctic</option>
+          </select>
+        </div>
+       </div>
+       <div class="mb-3 col-7">
+        <label for="maxGuest" class="form-label"> MaxGuest</label>
+        <input 
+        type="number" 
+        name="listing[maxGuest]" 
+        placeholder="Enter the number of guest allowed"
+        class="form-control"
+        value="<%=listing.maxGuest%>" 
+        />
+      
+      </div>
+       <br>
+        <button class="button-add">Edit</button>
+        <br><br>
+     </form>
+     
+  </div>
+  </div>
+
+</div>
+
+</body>

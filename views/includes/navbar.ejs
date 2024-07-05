@@ -1,0 +1,28 @@
+<input type="checkbox" id="check">
+<nav>
+  <a href="/listings"><div class="icon"><i class='fas fa-umbrella-beach' style='font-size:48px;color:red'></i></div></a>
+  
+  <form action="/listings/search"  method="get" class="search_box">
+    <input  type="search" placeholder="Discover Your Next Adventure Here..." name="title" >
+    <button class="btn btn-search " type="submit">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button> 
+      
+  </form>
+  <ol>
+    <li><a href="/listings">Explore</a></li>
+    <li><a href="/listings/new">Host your listings</a></li>
+    <%if(!currUser){%>  
+    <li><a href="/signup">Signup</a></li>
+    <li><a href="/login">Login</a></li>
+    <% } %>
+    <%if(currUser){%>
+    <li><a href="/profile">Profile</a></li>
+    <li><a href="/logout">Logout</a></li>
+    <% } %>
+  </ol>
+  <label for="check" class="bar">
+    <span class="fa fa-bars" id="bars"></span>
+    <span class="fa fa-times" id="times"></span>
+  </label>
+</nav>

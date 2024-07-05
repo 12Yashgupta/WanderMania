@@ -1,0 +1,142 @@
+<%-layout("/layouts/boilerplate")%>
+<style>
+    .main{
+        display: flex;
+        flex-direction: column;
+     
+        padding: 1rem;
+    }
+    .main-customer{
+        height: auto;
+        width: 100%;
+      margin-top: 2rem;
+        padding: 2rem;
+
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;}
+   .customer{
+   
+    height: auto;
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    margin: auto;
+    color: black;
+    font-weight: 700;
+   
+    /* background-color: #e1f1f9; */
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+   }
+   .first{
+    height: 3rem;
+    width: 100%;
+    display: flex;
+   
+   }
+   .box1{
+    width: 30%;
+    /* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
+    height: 100%;
+    font-size: 1.2rem;
+    text-align:  center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: #0a5071 0px 0px 3px 0px;
+   /* box-shadow: #0a5071 0px 2px 8px 0px; */
+   }
+   .box2{
+    /* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
+    width: 70%;
+    height: 100%;
+    font-size: 1.2rem;
+    box-shadow: #0a5071 0px 0px 3px 0px;
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    
+   }
+   h4{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: black;
+    text-align: center;
+   }
+   h3{
+    text-align: center;
+    color:black;
+    text-align: center;
+    font-weight: 700;
+    font-size: 3rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   }
+   .nobook{
+   height: auto;
+   width: 50%;
+   font-size: 3rem;
+   color: #0a5071;
+   margin: auto;
+   text-align: center;
+}
+</style>
+<body>
+   <div class="main">
+    <h3>Customer's <span style="color: #0a5071;">Booking</span></h3>
+    <% if(all_customers.length>0) {%>
+   <% for(cust of all_customers){ %> 
+   <%  if(cust.place.title==location){ %>
+    <hr>
+    <div class="main-customer">
+        <h4> <span style="color: #0a5071;">BOOKING-ID </span>: #<%=cust._id%></h4>
+        <div class="customer">
+            <div class="first">
+                <div class="box1">Place</div>
+                <div class="box2"><%=location%></div>
+           </div>
+            <div class="first">
+             <div class="box1">Username</div>
+             <div class="box2"><%=cust.owner.username%></div>
+        </div>
+        <div class="first">
+         <div class="box1">Email</div>
+         <div class="box2"><%=cust.owner.email%></div>
+    </div>
+    <div class="first">
+     <div class="box1">CheckIn</div>
+     <div class="box2"><%=cust.start%></div>
+    </div>
+    <div class="first">
+    <div class="box1">CheckOut</div>
+    <div class="box2"><%=cust.end%></div>
+    </div>
+    <div class="first">
+    <div class="box1">Total Guests</div>
+    <div class="box2"><%=cust.guest%></div>
+    </div>
+    <div class="first">
+    <div class="box1">Total Days</div>
+    <div class="box2"><%=cust.days%></div>
+    </div>
+    <div class="first">
+    <div class="box1">Total Fair</div>
+    <div class="box2">&#8377;<%=((price*cust.guest*cust.days)+(price*cust.guest*cust.days*0.18)).toLocaleString("en-In")%></div>
+    </div>
+     </div> 
+    </div>
+    
+<% } %>
+<% } %>
+<% } %>
+<% if(all_customers.length==0) {%>
+    <div class="nobook">No Bookings</div>
+<% } %>
+   </div>
+
+        
+</body>

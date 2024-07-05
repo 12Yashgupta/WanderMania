@@ -1,0 +1,13 @@
+<% if(message&&message.length){%>
+<div class="alert alert-success alert-dismissible  show col-4 offset-3 " style="    position: fixed; top: 100px; height: 3.5rem; border: 1px solid black; z-index: 1 !important;   " role="alert">
+    <%=message%>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" style="text-align: center; !important" aria-label="Close"></button>
+</div>
+<%}%>
+
+<% if(error&&error.length){%>
+    <div class="alert alert-danger alert-dismissible  show col-4 offset-3 " style="    position: fixed; top: 100px; height: 3.5rem; border: 1px solid black; z-index: 1 !important; font-weight: 700 !important; " role="alert">
+        <%=error%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" style="text-align: center; !important" aria-label="Close"></button>
+    </div>
+<%}%>

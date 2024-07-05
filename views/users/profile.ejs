@@ -1,0 +1,214 @@
+<% layout("/layouts/boilerplate") -%>
+<style>
+     .profile{
+        width: 100%;
+        /* border: 1px solid black; */
+        height: 26rem;
+        display: flex;
+          border-bottom-left-radius:1rem ;
+        border-bottom-right-radius:1rem;
+        border-top-left-radius:1rem;
+        border-top-right-radius:1rem;
+        margin-top: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      
+     }
+     .list_img{
+         height: 100%;
+         width: 40%;
+         /* border: 1px solid black; */
+         background-image: url("https://images.nationalgeographic.org/image/upload/v1652341395/EducationHub/photos/sonoran-desert.jpg");
+         background-size: cover;
+         background-repeat: no-repeat;
+         height: 100%; /* set the height of the div */
+         border-bottom-left-radius:1rem ;
+      
+        border-top-left-radius:1rem;
+       
+     }
+     .list_descrip{
+        height: 100%;
+        width: 60%;
+        /* border: 1px solid black; */
+        padding: 0.5rem;
+        flex-wrap: wrap;
+     }
+     .list_descrip h4{
+        font-size: 1.4rem;
+        font-weight: 700;
+     }
+     .list_descrip a{
+         color:  #0a5071;
+         font-size: 1.3rem;
+         text-decoration: none;
+         font-weight: 600;
+         
+     }
+     .list_descrip p{
+        font-size: 1.07rem;
+        font-weight: 500;
+      
+        margin-bottom: 1rem;
+     }
+     .list_descrip_details{
+       
+        border: 1px solid black;
+     }
+     
+     .list_details{
+       
+        width: 90%;
+        margin: 0.2rem;
+   
+        border-bottom-left-radius:1rem ;
+        border-bottom-right-radius:1rem;
+        border-top-left-radius:1rem;
+        border-top-right-radius:1rem;
+        padding: 0.1rem;
+        background-color:  #eff6f9;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+     }
+     .del{
+        margin-top: 1rem;
+     }
+     .all_profile{
+        display: flex;
+        flex-direction: column;
+        padding-top: 1rem;
+       margin-bottom: 1rem;
+     }
+   .title{
+        text-align: center;
+        font-size: 4rem;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   }
+   
+   .profit_button {
+ --color: #0a5071;
+ font-family: inherit;
+ display: inline-block;
+ width: 8em;
+ height: 2.6em;
+ line-height: 2.5em;
+ margin: 10px;
+ position: relative;
+ overflow: hidden;
+ border: 2px solid var(--color);
+ transition: color .5s;
+ z-index: 1;
+ font-size: 17px;
+ border-radius: 6px;
+ font-weight: 500;
+ color: var(--color);
+}
+
+.profit_button:before {
+ content: "";
+ position: absolute;
+ z-index: -1;
+ background: var(--color);
+ height: 150px;
+ width: 200px;
+ border-radius: 50%;
+}
+
+.profit_button:hover {
+ color: #fff;
+}
+
+.profit_button:before {
+ top: 100%;
+ left: 100%;
+ transition: all .7s;
+}
+
+.profit_button:hover:before {
+ top: -30px;
+ left: -30px;
+}
+
+.profit_button:active:before {
+ background: #0a5071;
+ transition: background 0s;
+}
+.nobook{
+   height: auto;
+   width: 50%;
+   font-size: 3rem;
+   color: #0a5071;
+   margin: auto;
+   text-align: center;
+}
+@media (max-width:771px)
+{
+   .profile{
+       height: 30rem;
+   }
+}
+@media (max-width:511px) {
+   .all_profile{
+      height: auto;
+   }
+   .profile{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: auto;
+   }
+   .list_img{
+      width: 100%;
+   }
+   .list_details{
+      width: 131%;
+   }
+   }
+   
+</style>
+<body>
+        <div class="all_profile">
+                <p class="title">Your <b style="color:  #0a5071;">Bookings</b> </p>
+              <% if(totalList.length>0){%> 
+              <%   for(let book of totalList){%>
+                <div class="profile">
+                        <img class="list_img" src=<%=book.place.image.url%>></img>
+                        <div class="list_descrip">
+                                <h4><%=book.place.title%></h4>
+                                <a href=""><i class="fa-solid fa-location-dot"></i><%=book.place.location%>,<%=book.place.country%></a>
+                               <div class="list_details">
+                                <p >
+                                        <p>
+                                               <b> Booking-id:</b><%=book._id%>
+                                        </p>
+                                        <p>
+                                          <b> Booking-date:</b><%=curr_date%>
+                                        </p>
+                                        <P>
+                                        <b>check-in :</b> &nbsp;&nbsp;&nbsp; <%=(book.start)%>
+                                        </p>
+                                        <p>
+                                              <b> check-out :</b>  &nbsp;&nbsp;&nbsp;<%=book.end%>
+                                        </p>
+                                        <p>
+                                               <b>Number of Guests:</b>&nbsp;&nbsp;<%=book.guest%>
+                                        </p>
+                                        <p>
+        <b> Total Price :</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8377;<%=((book.guest*book.place.price*book.days)+((book.guest * book.place.price*0.18 * book.days))).toLocaleString("en-In")%>
+                                        </p>
+                                        
+                               </div>
+                               <form action="/profile/<%=book._id%>?_method=DELETE" method="post" >
+                               <button   class="profit_button">Cancel Booking</button>   
+                               </form>
+                        </div>
+                </div>
+              
+        <% } %>
+        <% } %>
+        <% if(totalList.length==0) {%>
+              <div class="nobook">No Bookings</div>
+         <% } %>
+        </div>
+
+</body>

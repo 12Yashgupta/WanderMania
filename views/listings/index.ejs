@@ -1,0 +1,364 @@
+<% layout("/layouts/boilerplate") -%>
+<style>
+     #filters{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 1rem;
+     }
+     .filter{
+      text-align: center;
+      margin-right: 1.5rem;
+      margin-top: 2rem;
+      opacity: 0.7;
+     }
+     .filter:hover{
+      opacity: 1;
+      cursor: pointer;
+     }
+     .filter p{
+      font-size: 0.8 rem;
+     }
+     .tax-toggle{
+      border: 1px solid black;
+      border-radius: 1rem;
+      height: 3.25rem;
+      padding: 1rem;
+      margin-left: 3rem;
+      display: flex;
+      align-items: center;
+     }
+     
+     .form-check-input{
+      cursor: pointer;
+     }
+     .tax-info{
+      display: none;
+     }
+     /* .filter-option{
+       font-size: 1.2rem;
+     } */
+     .filter-place{
+      margin-top: 1rem;
+      border: none;
+      font-size: 1.4rem;
+     }
+     .filter-place div{
+      border-radius: 1rem;
+     }
+     .price-range{
+      display: flex;
+     }
+     .price-range input{
+      width: 10rem;
+      margin-right: 3rem;
+      margin-left: 3rem;
+     }
+     /* .filter:hover{
+      border-bottom: 1px solid black;
+     } */
+      .filter p:hover{
+        color:#0a5071;
+        border-bottom: 1px solid black;
+      }
+      .filter p:hover{
+        color: #0a5071;
+      }
+      /* .filter i:hover{
+        color: #0a5071;
+      } */
+     .options {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #eee;
+            border: 2px solid #0a5071;
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+            
+        }
+      .options:checked::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 6px;
+            width: 6px;
+            height: 12px;
+            border: solid #0a5071;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            display: inline-block;
+        }
+
+        /* Add focus styles */
+       .options:focus {
+            outline: none;
+            box-shadow: 0 0 2px 2px #0a5071;
+          
+        } 
+        #flexSwitchCheckDefault{
+          display: inline-block;
+        }
+</style>
+<body>
+    <div id="filters">
+            <div class="filter">
+              <a href="/listings/category/Trending" style="text-decoration: none; color: black; font-weight: 700;">
+              <div> <i class="fa-solid fa-fire"></i></div>
+              <p>Trending</p>
+              </a>
+            </div>
+            <div class="filter">
+              <a href="/listings/category/Rooms" style="text-decoration: none;color: black; font-weight: 700; ">
+                <div><i class="fa-solid fa-bed"></i></div>
+                <p>Rooms</p>
+              </a>
+           </div>
+           <div class="filter">
+            <a href="/listings/category/Iconic_Cities" style="text-decoration: none;color: black; font-weight: 700;">
+            <div><i class="fa-solid fa-mountain-city"></i></div>
+            <p>Iconic Cities</p>
+            </a>
+           </div>
+         <div class="filter">
+          <a href="/listings/category/Mountains" style="text-decoration: none; color: black; font-weight: 700;">
+          <div><i class="fa-solid fa-mountain"></i></div>
+          <p>Mountains</p>
+          </a>
+         </div>
+       <div class="filter">
+        <a href="/listings/category/Campings" style="text-decoration: none; color: black; font-weight: 700;">
+          <div><i class="fa-solid fa-campground"></i></div>
+          <p>Campings</p>
+        </a>
+       </div>
+       <div class="filter">
+        <a href="/listings/category/Farms" style="text-decoration: none; color: black; font-weight: 700;">
+        <div><i class="fa-solid fa-cow"></i></div>
+        <p>Farms</p>
+        </a>
+       </div>
+
+            <div class="filter">
+              <a href="/listings/category/Castles" style="text-decoration: none;color: black; font-weight: 700;">
+               <div><i class="fa-brands fa-fort-awesome"></i></div>
+               <p>Castles</p>
+              </a>
+            </div>
+
+            <div class="filter">
+              <a href="/listings/category/Artic" style="text-decoration: none;color: black; font-weight: 700;">
+              <div><i class="fa-solid fa-snowflake"></i></div>
+              <p>Arctic</p>
+              </a>
+           </div>
+            <div class="filter">
+              <a href="/listings/category/Pools" style="text-decoration: none;color: black; font-weight: 700;">
+              <div><i class="fa-solid fa-person-swimming"></i></div>
+              <p>Amazing Pools</p>
+              </a>
+           </div>
+
+          <div class="filter-place">
+              <div class=" filter-btn fw-bold border p-2  m-2 filter-option" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                 <i class="fa-solid fa-sliders me-1"></i>Filters
+              </div>
+          </div>
+
+
+           <div class="tax-toggle ">
+            <div class="form-check-reverse form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="border: 1px solid black;" >
+              <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+            </div>
+           </div>
+           
+    </div>
+
+
+   
+    <!-- Modal -->
+<div class="modal modal-lg fade" id="staticBackdrop" data-bs-backdrop="static"
+data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <form id="selectionForm" method="get" action="/listings" class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Filters</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="padding: 1rem 3rem;">
+            <div class="m-2">
+                <h5>Price Rage</h5>
+                <p style="font-size: 0.9rem;">Total prices for 5 nights before taxes</p>
+                <div class="price-range p-3">
+                    <input class="form-control " value="1000" type="number" min="1000" name="minPrice" id="minPrice">
+                    <span class="text-secondary">To</span>
+                    <input class="form-control" value="2200000" type="number" max="2200000"
+                    name="maxPrice" id="maxPrice">
+                </div>
+            </div>
+           
+<div class="m-2">
+                <h5>Types of place</h5>
+                <p style="font-size: 0.9rem;">Search rooms, entire homes or any type of place</p>
+                <div class="category-of-place p-2">
+                    <div class="row row-cols-lg-4 row-cols-md-4 row-cols-sm-4">
+                        <label class="filter-image col text-dark" >
+                          <div style="display: flex;">
+                            <input  type="checkbox" class="m-0 mb opt options" name="category" value="Pools">
+                            <div  style="font-size: 1.5rem;">
+                            <i class="fa-solid fa-person-swimming"></i>
+                            </div> 
+                          </div>
+                           Pools
+                        </label>
+                        <label class="filter-image col text-dark" >
+                          <div style="display: flex;">
+                            <input  type="checkbox" class="m-0 mb opt options" name="category" value="Trending">
+                            <div  style="font-size: 1.5rem;">
+                            <i class="fa-solid fa-fire"></i>
+                            </div> 
+                          </div>
+                           Trending
+                        </label>
+                        <label class="filter-image col text-dark" >
+                          <div style="display: flex;">
+                            <input  type="checkbox" class="m-0 mb opt options" name="category" value="Iconic-city">
+                            <div  style="font-size: 1.5rem;">
+                              <i class="fa-solid fa-mountain-city"></i>
+                            </div> 
+                          </div>
+                           Iconic Cities
+                        </label>
+                        <label class="filter-image col text-dark" >
+                          <div style="display: flex;">
+                            <input  type="checkbox" class="m-0 mb opt options" name="category" value="Pools" >
+                            <div  style="font-size: 1.5rem;">
+                              <i class="fa-solid fa-bed"></i>
+                            </div> 
+                          </div>
+                          Rooms
+                        </label>
+                        <label class="filter-image col text-dark" >
+                          <div style="display: flex;">
+                            <input type="checkbox" class="m-0 mb opt options" name="category" value="Mountains">
+                            <div  style="font-size: 1.5rem;;">
+                              <i class="fa-solid fa-mountain"></i>
+                            </div> 
+                          </div>
+                           Mountains
+                        </label>
+                        <label class="filter-image col text-dark" >
+                          <div style="display: flex;">
+                            <input  type="checkbox" class="m-0 mb opt options" name="category" value="Campings">
+                            <div  style="font-size: 1.5rem;">
+                            <i class="fa-solid fa-campground"></i>
+                            </div> 
+                          </div>
+                           Campings
+                        </label>
+                        <label class="filter-image col text-dark" >
+                          <div style="display: flex;">
+                            <input  type="checkbox" class="m-0 mb opt options" name="category" value="Farms">
+                            <div  style="font-size: 1.5rem;">
+                              <i class="fa-solid fa-cow"></i>
+                            </div> 
+                          </div>
+                           Farms
+                        </label>
+                        <label class="filter-image col text-dark" >
+                          <div style="display: flex;">
+                            <input  type="checkbox" class="m-0 mb opt options" name="category" value="Castles">
+                            <div  style="font-size: 1.5rem;">
+                              <i class="fa-brands fa-fort-awesome"></i>
+                            </div> 
+                          </div>
+                          Castles
+                        </label>
+                        <label class="filter-image col text-dark" >
+                          <div style="display: flex;">
+                            <input type="checkbox" id="arctic" class="m-0 mb opt options" name="category" value="Arctic">
+                            <div  style="font-size: 1.5rem;;">
+                              <i class="fa-solid fa-snowflake"></i>
+                            </div> 
+                          </div>
+                           Arctic
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-outline-primary">Apply</button>
+        </div>
+    </form>
+</div>
+</div>
+   
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 ">
+        <%  for(let list of allListings){  %>
+            <!-- <a href="/listings/<%=list._id%>" class="listing-link"> -->
+                <div class="card col listing-card " style=" margin-bottom: 1rem; margin-left: 0.5rem;" >
+                    <img src="<%=list.image.url%>" class="card-img-top" alt="listing-image" style="height:20rem ">
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                      <p class="card-text"><b> <%=list.title%></b> <br> &#8377; <%=list.price.toLocaleString("en-In")%> /night  
+                      <i class="tax-info">&nbsp; +18% GST</i></p>
+                      <a href="/listings/<%=list._id%>" class="card-btn gradient-border"> Read More</a>
+                    </div>
+                  </div>
+               
+            <!-- </a> -->
+            <% } %>
+    </div>
+   
+    <script>
+        let taxSwitch=document.getElementById("flexSwitchCheckDefault");
+        taxSwitch.addEventListener("click",()=>{
+         let tax_info=document.getElementsByClassName("tax-info");
+         console.log(tax_info);
+         for(tax of tax_info)
+         {
+          if(tax.style.display!="inline")
+          tax.style.display="inline";
+         else
+         tax.style.display="none";
+         }
+        }
+      );
+     
+     
+    let opt = document.querySelectorAll('.opt');
+    opt.forEach((ele) => {
+        ele.addEventListener("change", function () {
+            if (this.checked == true)
+                this.style.display = "block"
+            else
+                this.style.display = "none"
+        })
+    })
+    document.getElementById('selectionForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const form = e.target;
+        const selectedCheckboxes = form.querySelectorAll('input[type="checkbox"]:checked');
+        const selectedValues = Array.from(selectedCheckboxes).map(checkbox => checkbox.value);
+
+        // Create a query string with the selected categories
+        const params = new URLSearchParams();
+        selectedValues.forEach(value => params.append('category', value));
+
+        // Get the price range values
+        const minPrice = form.querySelector('#minPrice').value;
+        const maxPrice = form.querySelector('#maxPrice').value;
+        if (minPrice !== '') params.append('minPrice', minPrice);
+        if (maxPrice !== '') params.append('maxPrice', maxPrice);
+
+        // Redirect to the /listings route with the selected values as query parameters
+        window.location.href = `/listings?${params.toString()}`;
+    });
+    </script>
+</body>

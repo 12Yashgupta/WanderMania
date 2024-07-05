@@ -1,0 +1,512 @@
+<%-layout("/layouts/boilerplate")%>
+<style>
+    .title{
+        margin-bottom: 1rem;
+    }
+    .title h2{
+        word-spacing: 1rem;
+    }
+    .location a,i{
+        font-size: 1.2rem;
+        color: black;
+    }
+    .place-pic{
+       
+        width:100%;
+        height: 40rem;
+        border-radius: 10%;
+        margin-bottom: 1rem;
+    }
+    .place-pic img{
+        height: 100%;
+        width: 100%;
+        border-radius: 3%;
+        border: 2px solid black;
+    }
+    .about{
+      
+        height: 40rem;
+        width: 100%;
+        display: flex;
+       
+    }
+    .about .description{
+        height: 80%;
+        width: 50%;
+        padding:2rem;
+    }
+   
+    .description h2{
+        font-weight: 700;
+     
+    }
+    .description-about h5{
+        line-height: 1.5;
+    }
+    .description-guest{
+      
+        height: 5rem;
+        display: flex;
+        align-items: center;
+          margin-bottom: 1rem;
+    }
+    .description-about h4{
+         font-weight: 600;
+    }
+    .about .booking{
+        height: 80%;
+        width: 50%;
+     
+        border-radius: 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+    }
+    .booking .price{
+    
+      height: 20%;
+      width: 100%;
+     
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .booking .price h3{
+    
+  font-size: 2rem;
+
+  } 
+    .booking .check-in{
+     
+      height: 90%;
+      width: 90%;
+
+      display: flex;
+      flex-direction: column;
+      
+    }
+    .check-in .check-in-out{
+        width: 100%;
+        height: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top-left-radius:1rem ;
+        border-top-right-radius:1rem ;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+    .check-in-out div{
+        height: 100%;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+    .check-in .guest{
+         padding: 1rem;
+         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+         height: 32%;
+         width: 100%;
+         
+         border-bottom-left-radius:1rem ;
+         border-bottom-right-radius:1rem ;
+    }
+    .check-in .guest input{
+        width: 80%;
+        height: 3.5rem;
+        padding-left: 1rem;
+        border-bottom-left-radius:1rem ;
+        border-bottom-right-radius:1rem ;
+        border-top-left-radius:1rem ;
+        border-top-right-radius:1rem ;
+        border: none;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    }
+    .check-in .book-btn{
+        margin: auto;
+        height:15%;
+        width: 100%;
+        /* box-shadow: #3d83a4 0px 19px 38px, #3d83a4 0px 15px 12px; */
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        box-shadow: #3d83a4 0px 13px 27px -5px, #3d83a4 0px 8px 16px -8px;
+        border-bottom-left-radius:1rem ;
+        border-bottom-right-radius:1rem ;
+        border-top-left-radius:1rem ;
+        border-top-right-radius:1rem ;
+        font-size: 2rem;
+        background:#3d83a4;
+        color: white;
+    }
+    .del-edit-description{
+        height: 4rem;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+
+/* CSS */
+.button-81 {
+  background-color:#3d83a4;
+  border: 0 solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action:  20%;
+}
+
+.button-81:hover {
+  background-color: #1e293b;
+  color: #fff;
+  box-shadow:  #1e293b 0px 13px 27px -5px,  #1e293b 0px 8px 16px -8px;
+}
+.book-btn:hover {
+  background-color: #1e293b;
+  color: #fff;
+  box-shadow:  #1e293b 0px 13px 27px -5px,  #1e293b 0px 8px 16px -8px;
+}
+@media (min-width: 768px) {
+  .button-81 {
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+  }
+}
+.del-edit-description a {
+    /* width: 40%; */
+    width: 40%;
+    font-size: 1.5rem;
+    box-shadow: #3d83a4 0px 13px 27px -5px, #3d83a4 0px 8px 16px -8px;
+}
+.del-edit-description button{
+    height: 100%;
+    font-size: 1.5rem;
+    box-shadow: #3d83a4 0px 13px 27px -5px, #3d83a4 0px 8px 16px -8px;
+}
+.review{
+    height: 30rem;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 3rem;
+    background-color: white;
+    border-bottom-left-radius:1rem ;
+        border-bottom-right-radius:1rem ;
+        border-top-left-radius:1rem ;
+        border-top-right-radius:1rem ;
+        box-shadow: #3d83a4  0px 30px 60px -12px inset, #3d83a4  0px 18px 36px -18px inset;
+        box-shadow: #3d83a4  0px 54px 55px, #3d83a4 0px -12px 30px, #3d83a4  0px 4px 6px, #3d83a4  0px 12px 13px,#3d83a4  0px -3px 5px;
+        box-shadow: #3d83a4  0px 3px 8px;
+    }
+.review p{
+     font-weight: 700;
+     font-size: 2rem;
+
+     text-align: center;
+}
+.review-rating{
+    height: 6em;
+    font-weight: 600;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.review-rating label{
+    font-size: 1.5rem;
+}
+.review .comment{
+  
+    padding: 1rem;
+
+}
+.comment label{
+    font-size: 1.5rem;
+  
+    font-weight: 600;
+}
+.comment textarea{
+    width: 80%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin-bottom: 1rem;
+  
+}
+.review button{
+    margin-left: 1rem;
+}
+.see-review{
+   height: auto;
+   border-bottom-left-radius:1rem ;
+        border-bottom-right-radius:1rem ;
+        border-top-left-radius:1rem ;
+        border-top-right-radius:1rem ;
+        box-shadow: #3d83a4 0px 5px 15px;
+        margin-bottom: 4rem;
+}
+.see-review .review-title{
+    font-size: 2rem;
+    text-align: center;
+}
+.cust-review{
+   
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+   margin: 1rem;
+   height: auto;
+   padding: 0.5rem;
+   border-bottom-left-radius:1rem ;
+        border-bottom-right-radius:1rem ;
+        border-top-left-radius:1rem ;
+        border-top-right-radius:1rem ;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.all-review{
+    border: 1px soldi black;
+    display: flex;
+    flex-wrap: wrap;
+    
+    
+}
+.cust-review h5{
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.5rem;
+}
+.cust-review p{
+    font-size: 1rem;
+}
+.cust-review button
+{
+    background-color: black;
+    color: white;
+}
+.cust-review button:hover{
+  box-shadow:  #1e293b 0px 13px 27px -5px,  #1e293b 0px 8px 16px -8px;
+  color: white;
+  background-color: black;
+}
+.cust-review-comment{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+   height: 11rem;
+   margin-bottom: 0.5rem;
+   padding: 0.2rem;
+   border-bottom-left-radius:0.5rem ;
+        border-bottom-right-radius:0.5rem ;
+        border-top-left-radius:0.5rem ;
+        border-top-right-radius:0.5rem ;
+}
+.location-map{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;   
+    padding: 1rem;
+        border-bottom-left-radius:1rem ;
+        border-bottom-right-radius:1rem;
+        border-top-left-radius:1rem;
+        border-top-right-radius:1rem;
+        margin-bottom: 2rem;
+}
+.location-map h3{
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+ 
+}
+#map{
+   
+    width: 90%;
+    margin-bottom: 2rem;
+    margin: auto;
+}
+.customer-btn{
+   /* width: 26rem;
+    margin-top: 3rem; */
+    width: 100%;
+    margin-top: 2rem;
+    height: 4rem;
+    box-shadow: #3d83a4 0px 5px 15px;
+}
+</style>
+<body>
+   <script>
+       const mapToken="<%=process.env.MAP_TOKEN%>"
+       const coordinates=<%- JSON.stringify(list.geometry.coordinates)%>;
+   </script>
+   
+
+          <div class="title">
+              <h2><%=list.title%></h2>
+              <div class="location">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <a href="#map"><b><%=list.location%></b>,<b><%=list.country%></b></a>
+              </div>
+          </div>
+             <div class="place-pic">
+                <img src="<%=list.image.url%>"  alt="listing_image">
+             </div>
+              
+              <div class="about">
+                <div class="description">
+                    <div class="description-about">
+                        <h4>Owned By  <i><%=list.owner.username%></i></h4>
+                        <h2>Description</h2>
+                        <h5><%=list.description%></h5>
+                    </div>
+                     <div class="description-guest">
+                        <h5><b>Max number of guests</b>: <%=list.maxGuest%> </h5>
+                     </div>
+                     <% if(currUser && list.owner._id.equals(currUser._id)){%>
+                     <div class="del-edit-description">
+                        <form action="/listings/<%=list._id%>?_method=DELETE" style=" width: 40%;" method="post">
+                            <button class="button-81" style="width: 100%;">Delete</button>
+                        </form>
+                        <a href="/listings/<%=list._id%>/edit" class="button-81">Edit</a>
+                        <!-- <a href="/listings/<%=list._id%>/booking" class="button-81 customer-btn">See Customers Bookings</a> -->
+                     </div>
+                     <form action="/listings/<%=list._id%>/booking" style=" width: 40%;" method="post">
+                        <button class="button-81 customer-btn" style="width: 100%;">See Customers</button>
+                    </form>
+                     <%}%>
+                </div>
+             
+                <% if(!currUser){%> 
+                <div class="booking">
+                         <div class="price">
+                         
+                             <h3> <b>Price: </b>&#8377;<%=list.price.toLocaleString("en-In")%> / per night </h3>
+                         
+                         </div>
+                        <form action="/listings/<%=list._id%>/booking"  method="get" class="check-in">
+                            <div class="check-in-out">
+                                <div>
+                                    <h5><b>check-in</b></h5>
+                                    <input type="date" name="booking[start]" role="menu">
+                                </div>
+                                <div>
+                                    <h5> <b>check-out</b></h5>
+                                    <input type="date" name="booking[end]" role="menu">
+                                </div>
+                            </div>
+                            <div class="guest">
+                                <h5><b>Number of guests</b></h5>
+                                <input type="number" name="booking[guest]">
+                            </div>
+                            <button class="book-btn" type="submit">
+                                       Book this place
+                            </button>
+                        </form>
+                </div>
+                <% } %>
+                <% if(currUser  && !(list.owner._id.equals(currUser._id))){%> 
+                    <div class="booking">
+                             <div class="price">
+                             
+                                 <h3> <b>Price: </b>&#8377;<%=list.price.toLocaleString("en-In")%> / per night </h3>
+                             
+                             </div>
+                            <form action="/listings/<%=list._id%>/booking"  method="get" class="check-in">
+                                <div class="check-in-out">
+                                    <div>
+                                        <h5><b>check-in</b></h5>
+                                        <input type="date" name="booking[start]" role="menu">
+                                    </div>
+                                    <div>
+                                        <h5> <b>check-out</b></h5>
+                                        <input type="date" name="booking[end]" role="menu">
+                                    </div>
+                                </div>
+                                <div class="guest">
+                                    <h5><b>Number of guests</b></h5>
+                                    <input type="number" name="booking[guest]">
+                                </div>
+                                <button class="book-btn" type="submit">
+                                           Book this place
+                                </button>
+                            </form>
+                    </div>
+                    <% } %>
+              </div>
+              <hr>
+              <% if(currUser){ %>
+    <div class="review">
+        <p>Add Review And Rating</p>
+        <form action="/listings/<%=list._id%>/review" method="post" novalidate class="needs-validation">
+            <div class="review-rating">
+             <label for="rating" class="form-label">Rating</label>
+             <fieldset class="starability-slot">
+                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                <label for="first-rate1" title="Terrible">1 star</label>
+                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                <label for="first-rate2" title="Not good">2 stars</label>
+                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                <label for="first-rate3" title="Average">3 stars</label>
+                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                <label for="first-rate4" title="Very good">4 stars</label>
+                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                <label for="first-rate5" title="Amazing">5 stars</label>
+              </fieldset>
+            </div>
+            <div class="comment">
+                <label for="comment" class="form-label">Comments</label>
+                <textarea 
+                name="review[comment]" 
+                id="comment" 
+                cols="30"
+                 rows="5" 
+                 class="form-control"
+                 required
+                 ></textarea>
+                 <div class="invalid-feedback">Please enter valid feedback!</div>
+            </div>
+            <button class="button-81">Submit</button>
+        </form>
+    </div>
+    <% } %>
+    <hr>
+    <%if(list.reviews.length!=0){%>
+      <div class="see-review">
+        <p class="review-title"><b>Customer's Review</b></p>
+        <div class="all-review">
+            <%for(review of list.reviews){%>
+                <div class="cust-review">
+                   <h5 ><%=review.author.username%></h5>
+                   <div class="cust-review-comment">
+                    <p><%=review.comment%></p>
+                   </div>
+                    <p class="starability-result card-text" data-rating="<%=review.rating%>" ></p>
+                 
+                   <form action="/listings/<%=list._id%>/review/<%=review._id%>?_method=DELETE" method="POST" class="mb-3">
+                          <button class="btn btn-md ">Delete</button>
+                    </form>
+                </div> 
+             <%}%>
+        </div>
+       
+        </div>
+    <% } %>
+    <hr>
+    <div class="location-map">
+        <h3 >Where you will be</h3>
+        <div id="map"></div>
+    </div>
+  
+     <script src="/js/map.js"></script>
+</body>
