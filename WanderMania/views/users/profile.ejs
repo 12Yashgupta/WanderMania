@@ -1,0 +1,190 @@
+<% layout("/layouts/boilerplate") -%>
+
+<style>
+  body {
+    background: #f9fafb;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0a5071;
+    margin: 2rem 0;
+  }
+
+  .booking-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .booking-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+
+  .booking-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .card-img {
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .card-body {
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+
+  .card-body h4 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-body a {
+    color: #0a5071;
+    font-size: 0.95rem;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+
+  .booking-details p {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0.2rem 0;
+  }
+
+  .cancel-btn {
+    align-self: flex-start;
+    background-color: #ff4d4d;
+    border: none;
+    color: #fff;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+
+  .cancel-btn:hover {
+    background-color: #d93636;
+  }
+
+  .popup {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popup-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 320px;
+    text-align: center;
+  }
+
+  .popup-content p {
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+  }
+
+  .popup-content button {
+    padding: 0.5rem 1.1rem;
+    border-radius: 6px;
+    border: none;
+    margin: 0 0.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .yes-btn {
+    background: #0a5071;
+    color: white;
+  }
+
+  .no-btn {
+    background: #ccc;
+  }
+
+  .nobook {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #0a5071;
+    margin-top: 3rem;
+  }
+</style>
+
+<body>
+   <div>
+      <p class="title">Your <b>Bookings</b></p>
+    
+      <% if (totalList.length > 0) { %>
+        <div class="booking-container">
+          <% for (let book of totalList) { %>
+            <div class="booking-card">
+              <img class="card-img" src="<%= book.place.image.url %>" alt="Place Image" />
+              <div class="card-body">
+                <h4><%= book.place.title %></h4>
+                <a href="#"><i class="fa-solid fa-location-dot"></i> <%= book.place.location %>, <%= book.place.country %></a>
+                <div class="booking-details">
+                  <p><b>Booking ID:</b> <%= book._id %></p>
+                  <p><b>Booking Date:</b> <%= curr_date %></p>
+                  <p><b>Check-in:</b> <%= book.start %></p>
+                  <p><b>Check-out:</b> <%= book.end %></p>
+                  <p><b>Guests:</b> <%= book.guest %></p>
+                  <p><b>Total:</b> ₹<%= ((book.guest * book.place.price * book.days) + ((book.guest * book.place.price * 0.18 * book.days))).toLocaleString("en-In") %></p>
+                </div>
+                <button class="cancel-btn" onclick="openPopup('<%= book._id %>')">Cancel Booking</button>
+              </div>
+            </div>
+    
+            <!-- Popup -->
+            <div id="popup-<%= book._id %>" class="popup">
+              <div class="popup-content">
+                <p>Are you sure you want to cancel this booking?</p>
+                <form action="/profile/<%= book._id %>?_method=DELETE" method="POST">
+                  <button type="submit" class="yes-btn">Yes</button>
+                </form>
+                <button class="no-btn" onclick="closePopup('<%= book._id %>')">No</button>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      <% } else { %>
+        <div class="nobook">No Bookings</div>
+      <% } %>
+    </div>
+    
+    <script>
+      function openPopup(id) {
+        document.getElementById("popup-" + id).style.display = "flex";
+      }
+    
+      function closePopup(id) {
+        document.getElementById("popup-" + id).style.display = "none";
+      }
+    </script>
+</body>

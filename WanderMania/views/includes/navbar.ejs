@@ -1,0 +1,32 @@
+<input type="checkbox" id="check" hidden>
+<nav class="navbar">
+  <a href="/listings" class="logo">
+    <i class='fas fa-umbrella-beach'></i>
+    <span>WanderMania</span>
+  </a>
+
+  <form action="/listings/search" method="get" class="search-box">
+    <input type="search" placeholder="Discover Your Next Adventure..." name="title">
+    <button type="submit">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+  </form>
+
+  <ul class="nav-links">
+    <li><a href="/listings">Explore</a></li>
+    <li><a href="/listings/new">Host</a></li>
+    <li><a href="/listings/wishlist">Wishlist</a></li>
+    <% if (typeof currUser !== 'undefined' && currUser) { %>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/logout">Logout</a></li>
+    <% } else { %>
+      <li><a href="/signup">Signup</a></li>
+      <li><a href="/login">Login</a></li>
+    <% } %>
+  </ul>
+
+  <label for="check" class="menu-btn">
+    <i class="fa fa-bars" id="bars"></i>
+    <i class="fa fa-times" id="times"></i>
+  </label>
+</nav>

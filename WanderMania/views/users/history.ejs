@@ -1,0 +1,64 @@
+<%-layout("/layouts/boilerplate")%>
+<div class="container mt-5">
+  <h1 class="text-center mb-5 fw-bold">📅 Booking History</h1>
+
+  <!-- Active Bookings -->
+  <h3 class="text-success mb-3">✅ Active Bookings</h3>
+  <% if (activeBookings.length === 0) { %>
+    <p class="text-muted">No active bookings found.</p>
+  <% } %>
+  <div class="row">
+    <% activeBookings.forEach(booking => { %>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card shadow-sm border-0 rounded-4">
+          <img src="<%= booking.place.image.url %>" class="card-img-top rounded-top-4" style="height: 220px; object-fit: cover;" alt="Listing Image">
+          <div class="card-body">
+            <h5 class="card-title mb-2 fw-semibold"><%= booking.place.title %></h5>
+            <p class="mb-1 text-muted">
+              <small>📆 Booking made on: <%= new Date(booking.createdAt).toLocaleString("en-IN") %></small>
+            </p>
+            <p class="mb-1"><strong>From:</strong> <%= booking.start %></p>
+            <p class="mb-1"><strong>To:</strong> <%= booking.end %></p>
+            <p class="text-success fw-semibold mb-0">🟢 Status: <%= booking.status %></p>
+
+            <!-- Remove button -->
+            <form action="/remove-booking/<%= booking._id %>" method="POST">
+              <button type="submit" class="btn btn-danger mt-2 w-100">Remove Booking History</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <hr class="my-5">
+
+  <!-- Cancelled Bookings -->
+  <h3 class="text-danger mb-3">❌ Cancelled Bookings</h3>
+  <% if (cancelledBookings.length === 0) { %>
+    <p class="text-muted">No cancelled bookings found.</p>
+  <% } %>
+  <div class="row">
+    <% cancelledBookings.forEach(booking => { %>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card shadow-sm border-danger border-2 rounded-4">
+          <img src="<%= booking.place.image.url %>" class="card-img-top rounded-top-4" style="height: 220px; object-fit: cover;" alt="Listing Image">
+          <div class="card-body">
+            <h5 class="card-title mb-2 fw-semibold"><%= booking.place.title %></h5>
+            <p class="mb-1 text-muted">
+              <small>📆 Booking made on: <%= new Date(booking.createdAt).toLocaleString("en-IN") %></small>
+            </p>
+            <p class="mb-1"><strong>From:</strong> <%= booking.start %></p>
+            <p class="mb-1"><strong>To:</strong> <%= booking.end %></p>
+            <p class="text-danger fw-semibold mb-0">🔴 Status: <%= booking.status %></p>
+
+            <!-- Remove button -->
+            <form action="/remove-booking/<%=booking._id %>" method="POST">
+              <button type="submit" class="btn btn-danger mt-2 w-100">Remove Booking History</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>

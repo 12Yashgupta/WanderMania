@@ -1,0 +1,243 @@
+<%-layout("/layouts/boilerplate")%>
+<style>
+  body {
+        background-color: #f7f9fc;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .main {
+        padding: 2rem 0;
+    }
+
+    .heading {
+        font-size: 3rem;
+        color: #0a5071;
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 4px #ccc;
+    }
+
+    .profile-container {
+        background-color: white;
+        width: 90%;
+        max-width: 600px;
+        margin: auto;
+        padding: 2rem;
+        border-radius: 1.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        text-align: center;
+    }
+
+    .profile-img-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.profile-img {
+    height: 10rem;
+    width: 10rem;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 3px solid #0a5071;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.05);
+}
+
+.camera-icon {
+    position: absolute;
+    /* bottom: 20 rem; */
+    right: 0;
+    top: 8rem;
+    background-color: #0a5071;
+    color: white;
+    border-radius: 50%;
+    padding: 0.4rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: 2px solid white;
+}
+
+.camera-icon:hover {
+    background-color: #083a57;
+}
+    .title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #0a5071;
+        margin-bottom: 0.5rem;
+    }
+
+    .email {
+        font-size: 1.2rem;
+        color: #555;
+        margin-bottom: 1.5rem;
+    }
+
+    .button-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .profit_button {
+        --color: #0a5071;
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--color);
+        background: #fff;
+        border: 2px solid var(--color);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .profit_button:hover {
+        background: var(--color);
+        color: white;
+    }
+
+    .listing {
+        margin: 3rem auto;
+        width: 90%;
+    }
+
+    .property {
+        font-size: 2.5rem;
+        text-align: center;
+        color: #0a5071;
+        margin-bottom: 2rem;
+    }
+
+    .listing-card {
+        background: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        margin-bottom: 2rem;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+        padding-bottom: 2rem;
+        margin-left: 10rem;
+    }
+
+    .listing-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+
+    .tax-info {
+        font-size: 0.85rem;
+        color: #777;
+    }
+
+    .nobook {
+        font-size: 2rem;
+        color: #0a5071;
+        text-align: center;
+        margin-top: 2rem;
+    }
+    .upload-form {
+    margin: 1.5rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.upload-form input[type="file"] {
+    display: block;
+    margin: 0.5rem auto;
+    font-size: 1rem;
+}
+
+</style>
+<body>
+    <div class="main">
+      <div class="heading">
+        <i class='fas fa-umbrella-beach'></i> Welcome to Your Profile
+      </div>
+  
+      <% const profileUrl = user.profilePic ? user.profilePic.url : "https://i.pravatar.cc/300"; %>
+
+      <div class="profile-container">
+        <div class="profile-img-wrapper">
+          <div class="profile-img" id="profilePreview" style="background-image: url('<%= profileUrl %>');"></div>
+          <form id="uploadForm" action="/profile/updatePic" method="POST" enctype="multipart/form-data">
+            <label for="fileInput" class="camera-icon" title="Change photo">
+              <i class="fas fa-camera"></i>
+            </label>
+            <input type="file" name="profilePic" id="fileInput" accept="image/*" hidden required>
+            <button class="profit_button" type="submit" style="margin-top: 1rem;">Update Picture</button>
+          </form>
+        </div>
+      
+        <div style="margin-top: 1.5rem;">
+          <div class="title"><%= name %></div>
+          <div class="email"><%= email %></div>
+        </div>
+      
+        <hr style="margin: 1.5rem 0;">
+      
+        <!-- Action Buttons -->
+        <div class="button-group">
+          <a href="/profile/booking" class="profit_button"><i class="fas fa-suitcase-rolling"></i> Your Bookings</a>
+          <form method="POST" action="/profile/customer">
+            <button class="profit_button" type="submit"><i class="fas fa-users"></i> Customers</button>
+          </form>
+          <form method="GET" action="/chat/see_chats">
+            <button class="profit_button" type="submit"><i class="fas fa-comments"></i> See Chats</button>
+          </form>
+          <form method="GET" action="/profile/history">
+            <button class="profit_button" type="submit"><i class="fas fa-history"></i> Booking History</button>
+          </form>
+        </div>
+      </div>
+      
+      
+      <% if (listings.length > 0) { %>
+        <div class="listing">
+          <div class="property">Your Properties</div>
+          <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+            <% for (let list of listings) { %>
+              <div class="card col listing-card">
+                <img src="<%= list.image.url %>" class="card-img-top" alt="listing-image">
+                <div class="card-body">
+                  <p class="card-text">
+                    <b><%= list.title %></b><br>
+                    ₹ <%= list.price.toLocaleString("en-In") %> / night
+                    <span class="tax-info">+18% GST</span>
+                  </p>
+                  <a href="/listings/<%= list._id %>" class="profit_button">Read More</a>
+                </div>
+              </div>
+            <% } %>
+          </div>
+        </div>
+      <% } else { %>
+        <div class="nobook">You have no listings yet.</div>
+      <% } %>
+    </div>
+  </body>  

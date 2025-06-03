@@ -1,0 +1,44 @@
+<!-- <% if(message&&message.length){%>
+<div class="alert alert-success alert-dismissible  show col-4 offset-3 " style="    position: fixed; top: 92px; height: 3.5rem; border: 1px solid black; z-index: 1 !important;   " role="alert">
+    <%=message%>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" style="text-align: center; !important" aria-label="Close"></button>
+</div>
+<%}%>
+
+<% if(error&&error.length){%>
+    <div class="alert alert-danger alert-dismissible  show col-4 offset-3 " style="    position: fixed; top: 92px; height: 3.5rem; border: 1px solid black; z-index: 1 !important; font-weight: 700 !important; " role="alert">
+        <%=error%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" style="text-align: center; !important" aria-label="Close"></button>
+    </div>
+<%}%> -->
+
+<script>
+    // Auto-hide flash messages after 3 seconds (3000ms)
+//     setTimeout(() => {
+//       const flashMessages = document.querySelectorAll('.flash-msg');
+//       flashMessages.forEach(msg => {
+//         msg.style.transition = "opacity 0.5s ease-out";
+//         msg.style.opacity = "0";
+//         setTimeout(() => msg.remove(), 500); // Remove from DOM after fade
+//       });
+//     }, 3000);
+//   </script>
+<% if(message && message.length){ %>
+    <div class="alert alert-success alert-dismissible fade show col-4 offset-3 flash-msg" 
+         style="position: fixed; top: 92px; height: 3.5rem; border: 1px solid black; z-index: 1 !important;" 
+         role="alert">
+      <%= message %> <span class="countdown">(3)</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
+  
+  <% if(error && error.length){ %>
+    <div class="alert alert-danger alert-dismissible fade show col-4 offset-3 flash-msg" 
+         style="position: fixed; top: 92px; height: 3.5rem; border: 1px solid black; z-index: 1 !important; font-weight: 700 !important;" 
+         role="alert">
+      <%= error %> <span class="countdown">(3)</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
+  
+  
